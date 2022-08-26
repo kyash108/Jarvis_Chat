@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jarvis_chat/screens/registration_screen.dart';
+import 'login_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
 
@@ -7,7 +10,27 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin{
+  // late AnimationController controller;
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   controller = AnimationController(
+  //     duration: Duration(seconds: 1),
+  //     vsync: this,
+  //     upperBound: 100.0
+  //   );
+  //   controller.forward();
+  //   controller.addListener(() {
+  //     setState(() {
+  //
+  //     });
+  //     print(controller.value);
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,20 +44,35 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: Image.asset('images/logo.png'),
-                  height: 60.0,
+                Hero(tag: 'logo',
+                    child: Container(
+                      child: Image.asset('images/logoiron.png'),
+                      height: 60.0,
+                    ),
                 ),
-                Text(
-                  'Jarvis',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
+                  SizedBox(
+                    width: 140.0,
+                    child: DefaultTextStyle(
+                      style: const TextStyle(
+                        fontSize: 50.0,
+                        // fontFamily: 'Bobbers',
+                      ),
+                      child: AnimatedTextKit(
+                        animatedTexts: [
+                          TyperAnimatedText('Jarvis'),
+                        ],
+                        onTap: () {
+                          print("Tap Event");
+                        },
+                      ),
+                    ),
                   ),
-                ),
-                Container(
-                  child: Image.asset('images/logo.png'),
-                  height: 60.0,
+                Hero(
+                  tag: 'logoIron',
+                  child: Container(
+                    child: Image.asset('images/logoiron.png'),
+                    height: 60.0,
+                  ),
                 ),
               ],
             ),
@@ -49,7 +87,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 borderRadius: BorderRadius.circular(30.0),
                 child: MaterialButton(
                   onPressed: () {
-                    //Go to login screen.
+                    Navigator.pushNamed(context, LoginScreen.id);
                   },
                   minWidth: 200.0,
                   height: 42.0,
@@ -67,8 +105,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () {
-                    //Go to registration screen.
-                  },
+                    Navigator.pushNamed(context, RegistrationScreen.id);
+                    },
                   minWidth: 200.0,
                   height: 42.0,
                   child: Text(

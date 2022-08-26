@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1012347264402",
+    "project_id": "jarvis-chat",
+    "storage_bucket": "jarvis-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012347264402:android:3b1f396103f3561fd2754b",
+        "android_client_info": {
+          "package_name": "com.example.jarvis_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012347264402-8vfr292cu7srij69a3st8g0lmbcdvrev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9OtJItztlwumGxgCocaN__Aoz7MDs7AY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012347264402-8vfr292cu7srij69a3st8g0lmbcdvrev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

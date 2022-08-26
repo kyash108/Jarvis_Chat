@@ -52,15 +52,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                     ),
                 ),
                   SizedBox(
-                    width: 140.0,
+                    width: 170.0,
                     child: DefaultTextStyle(
                       style: const TextStyle(
-                        fontSize: 50.0,
+                        fontSize: 30.0,
                         // fontFamily: 'Bobbers',
                       ),
                       child: AnimatedTextKit(
                         animatedTexts: [
-                          TyperAnimatedText('Jarvis'),
+                          TyperAnimatedText('Jarvis-Chat'),
                         ],
                         onTap: () {
                           print("Tap Event");

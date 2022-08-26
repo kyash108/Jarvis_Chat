@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jarvis_chat/screens/registration_screen.dart';
+import 'package:jarvis_chat/screens/rounded_button.dart';
 import 'login_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -79,42 +80,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
             SizedBox(
               height: 48.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Log In',
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(30.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, RegistrationScreen.id);
-                    },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                  ),
-                ),
-              ),
-            ),
+            RoundedButton(color: Colors.green, onPressed:(){
+              Navigator.pushNamed(context, LoginScreen.id);
+            }, title: "Login"),
+            RoundedButton(color: Colors.orange, onPressed:(){
+              Navigator.pushNamed(context, RegistrationScreen.id);
+            }, title: "Register"),
           ],
         ),
       ),

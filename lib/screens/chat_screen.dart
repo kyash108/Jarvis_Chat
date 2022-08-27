@@ -93,7 +93,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     onPressed: () {
                       _fireStore.collection("messages").add({
                         'text':messageText,
-                        'sender':loggedInUser?.ema l,
+                        'sender':loggedInUser?.email,
                       });
                       messageTextController.clear();
                     },

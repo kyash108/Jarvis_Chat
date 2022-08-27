@@ -79,11 +79,15 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      if(now.month<=9){
+                      if(now.month<10){
                         month = "0"+now.month.toString();
+                      }else{
+                        month = now.month.toString();
                       }
-                      if(now.minute<=9){
+                      if(now.minute<10){
                         minute = "0"+now.minute.toString();
+                      }else{
+                        minute=now.minute.toString();
                       }
                       messagedTime = month+ "/" +now.day.toString()+"/" +now.year.toString()+" "+now.hour.toString() + ":" + minute;
                       _fireStore.collection("messages").add({

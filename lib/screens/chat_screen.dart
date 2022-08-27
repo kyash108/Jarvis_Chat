@@ -15,41 +15,29 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
   late String messageText;
+  late String messagedTime;
   final messageTextController = new TextEditingController();
+  DateTime now = DateTime.now();
+  var month;
+  var minute;
 
   void getCurrentUser()async{
     try{
       final user = await _auth.currentUser;
       if(user!=null){
         loggedInUser = user;
-        print(user);
       }
     }catch(e){
       print(e);
     }
   }
 
-  // void getMessages() async {
-  //   final messages = await _fireStore.collection('messages').get();
-  //   for (var message in messages.docs) {
-  //     print(message.data());
-  //   }
-  // }
-
-  void messageStream() async {
-    await for(var snapshot in _fireStore.collection('messages').snapshots()){
-      for(var message in snapshot.docs){
-            print(message.data());
-      }
-    }
-  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getCurrentUser();
-    print(loggedInUser?.email);
-    messageStream();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -91,9 +79,17 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   TextButton(
                     onPressed: () {
+                      if(now.month<=9){
+                        month = "0"+now.month.toString();
+                      }
+                      if(now.minute<=9){
+                        minute = "0"+now.minute.toString();
+                      }
+                      messagedTime = month+ "/" +now.day.toString()+"/" +now.year.toString()+" "+now.hour.toString() + ":" + minute;
                       _fireStore.collection("messages").add({
                         'text':messageText,
                         'sender':loggedInUser?.email,
+                        'time':messagedTime,
                       });
                       messageTextController.clear();
                     },
@@ -122,19 +118,21 @@ class MessagesStream extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        final messages = snapshot.data?.docs;
+        final messages = snapshot.data?.docs.reversed;
         List<MessageBubble> messageBubbles=[];
         for(var message in messages!){
           final messageText = message['text'];
           final messageSender = message['sender'];
+          final messageTime = message['time'];//time
           final currentUser = loggedInUser?.email;
 
-          final messageBubble = MessageBubble(messageSender, messageText,currentUser==messageSender);
+          final messageBubble = MessageBubble(messageSender, messageText,currentUser==messageSender,messageTime);
           messageBubbles.add(messageBubble);
 
         }
         return Expanded(
           child: ListView(
+            reverse: true,
             padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 10.0),
             children: messageBubbles,
           ),
@@ -148,10 +146,11 @@ class MessagesStream extends StatelessWidget {
 
 class MessageBubble extends StatelessWidget {
 
-  MessageBubble(this.sender,this.text,this.isMe);
+  MessageBubble(this.sender,this.text,this.isMe,this.messageT);
   final String sender;
   final String text;
   final bool isMe;
+  final String messageT;
 
 
   @override
@@ -184,6 +183,7 @@ class MessageBubble extends StatelessWidget {
               )
           ),
           Text('$sender',style: TextStyle(fontSize: 12.0,color: Colors.grey),),
+          Text('$messageT',style: TextStyle(fontSize: 12.0,color: Colors.grey),),
         ],
       ),
     );

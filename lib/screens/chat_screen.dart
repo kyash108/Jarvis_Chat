@@ -3,6 +3,7 @@ import 'package:jarvis_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 final _fireStore = FirebaseFirestore.instance;
+User? loggedInUser;
 
 class ChatScreen extends StatefulWidget {
   static String id = 'chat_screen';
@@ -13,7 +14,6 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
-  User? loggedInUser;
   late String messageText;
   final messageTextController = new TextEditingController();
 
@@ -127,7 +127,9 @@ class MessagesStream extends StatelessWidget {
         for(var message in messages!){
           final messageText = message['text'];
           final messageSender = message['sender'];
-          final messageBubble = MessageBubble(messageSender, messageText);
+          final currentUser = loggedInUser?.email;
+
+          final messageBubble = MessageBubble(messageSender, messageText,currentUser==messageSender);
           messageBubbles.add(messageBubble);
 
         }
@@ -146,21 +148,33 @@ class MessagesStream extends StatelessWidget {
 
 class MessageBubble extends StatelessWidget {
 
-  MessageBubble(this.sender,this.text);
+  MessageBubble(this.sender,this.text,this.isMe);
   final String sender;
   final String text;
+  final bool isMe;
+
 
   @override
   Widget build(BuildContext context) {
+    final color;
+    final crossAxis;
+    if(isMe==true){
+      color = Colors.blue;
+      crossAxis = CrossAxisAlignment.end;
+    }else{
+      color = Colors.redAccent;
+      crossAxis = CrossAxisAlignment.start;
+    }
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: crossAxis,
         children: [
           Material(
-            elevation: 5.0,
-              borderRadius: BorderRadius.circular(30.0),
-              color: Colors.blue,
+            shadowColor: color,
+            elevation: 40.0,
+              borderRadius: BorderRadius.only(topLeft:Radius.circular(10.0),bottomLeft: Radius.circular(30.0),topRight: Radius.circular(30.0)),
+              color: color,
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.0,horizontal: 20.0),
                 child: Text(

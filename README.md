@@ -1,16 +1,4 @@
-# jarvis_chat
+# Jarvis Chat
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This is a messaging application with the backend running on firebase. It is like a group chat where users can log in and chat with their peers.
+![Simulator_Screen_Recording_-_iPhone_11_-_2022-08-26_at_22_31_01_AdobeExpress](https://user-images.githubusercontent.com/72352678/187011216-f164e533-d949-4d84-b33f-fdf2c7ba10e3.gif)

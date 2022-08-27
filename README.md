@@ -1,4 +1,4 @@
-# jarvis_chat
+# Jarvis Chat
 
 A new Flutter project.
 
